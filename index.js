@@ -4,6 +4,8 @@ import es6Renderer from "express-es6-template-engine";
 import micros from "./micros/index.js";
 import buildMicro from "./libs/buildMicro.js";
 
+import fetch from "node-fetch";
+
 const PORT = process.env.PORT ?? 3000;
 
 const app = express();

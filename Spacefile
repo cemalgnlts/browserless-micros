@@ -16,4 +16,4 @@ micros:
           description: "browserless.io api key"
           default: "f5f24db9-01b8-43e1-ba50-df8e9bb86677"
     public_routes:
-      "/*"
+      - "/*"

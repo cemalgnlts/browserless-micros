@@ -17,6 +17,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "express-es6-template-engine": "^2.2.3",
+    "node-fetch": "^3.3.1",
     "uglify-js": "^3.17.4"
   },
   "devDependencies": {

@@ -1,6 +1,8 @@
 import fs from "fs/promises";
 import path from "path";
 
+import fetch from "node-fetch";
+
 import UglifyJS from "uglify-js";
 
 async function buildMicro(microName, token) {
