@@ -1,0 +1,49 @@
+<h2 class="text-4xl font-bold">${micro.name}</h2>
+
+<div class="card w-full bg-base-300 shadow-xl border-2 border-secondary">
+  <div class="card-body">
+    <form action="/micros/run/${micro.file}" method="POST" class="form-control w-full max-w-xs">
+      ${micro.form.map((layout, index) => {
+        const temp = [];
+        let { type = "input", label, name, ...attrs } = layout;
+        attrs = Object.entries(layout)
+          .map(attr => `${attr[0]}="${attr[1]}"`)
+          .join(" ") ?? "";
+      
+          const tag = type === "textarea" ? "textarea" : "input";
+          const inpClass = type === "number" ? "input" : type;
+          const customClasses = `${inpClass} ${inpClass}-bordered ${inpClass}-secondary`;
+          
+          label &&= `<label class="label" for="${name}"><span class="label-text">${label}</span></label>`;
+          
+          return `${label ? label : ""}
+          <${tag} type="${type}" class="${customClasses} mb-3" ${attrs} id="${name}"></${tag}>`;
+      }).join("")}
+    </form>
+    <div class="card-actions">
+      <button class="btn btn-primary gap-2" onclick="sendForm(this)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 -mt-[0.20rem]">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>        
+        Run
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="pb-16" id="meta">
+  <div class="flex my-10">
+    <div class="avatar items-center">
+      <div class="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+        <img src="${author.avatar_url}" class="m-0" />
+      </div>
+    </div>
+    <div class="ml-6 mt-1">
+      <p class="m-0 font-bold">${author.name}</p>
+      <a href="${author.html_url}" target="_blank">GitHub</a>
+    </div>
+  </div>
+  
+  <p>${micro.desc}</p>
+</div>
+

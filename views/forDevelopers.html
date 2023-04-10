@@ -1,0 +1,76 @@
+<h2 class="text-4xl font-bold">For Developers</h2>
+<p>Here are the steps you need to take to support the community by sharing your own micro.</p>
+
+<h3>Test it</h3>
+<p>Browserless provides an online and open tool to test your code, so you can debug it very quickly. Go to <a href="https://chrome.browserless.io" target="_blank">chrome.browserless.io</a> to debug code.</p>
+<p>
+  browserless ships with an interactive debugger that makes writing scripts faster and interactive. You can use things like debugger; and console.log to capture what's happening on the page while your
+  script is running. All of the Chrome devtools are there at your disposal. A small list of features includes:
+</p>
+
+<ul>
+  <li>Using debugging concepts like debugger; and console.log</li>
+  <li>Errors in the script are caught and show up in the console tab</li>
+  <li>You can inspect the DOM, watch network requests, and even see how the page is rendering</li>
+</ul>
+
+<h3>Edit Format</h3>
+<p>The micros are arranged for easier handling. If you have used puppetter before, you have opened the browser first, then created the page and closed the browser last. Browserless gives you the <code>page</code> object after the browser is opened and the page is rendered and closes the browser itself when the process is finished.</p>
+<p>See this structure at browserless.io: <a href="https://www.browserless.io/docs/function" target="_blank">/function API</a>. This structure has been slightly modified in Browserless Micro.</p>
+<p>Your code is minified with UglifyJS before submission.</p>
+
+<p>For example, a micro that gets the page title looks like this:</p>
+<pre><code>await page.goto("https://www.browserless.io")
+const title = await page.title()
+return title</code></pre>
+
+<p>Browserless Micros before the code runs, it translates to this:</p>
+<pre><code>module.exports = async ({ page, context }) => {
+    await page.goto("https://www.browserless.io")
+    const title = await page.title()
+    return {
+        data: title,
+        type: "application/json"
+    }
+}</code></pre>
+
+<p><b>page:</b> It is the page object in Puppeteer.</p>
+<p><b>context:</b> If your code receives information from the user, it is added here.</p>
+
+<p>After creating the code and editing the format, add it to the <code>/libs</code> folder with a unique name.</p>
+
+<h3>Registering</h3>
+<p>The last thing to do is to enter the micron's information in the <code>/micros/index.js</code> file.</p>
+<p>Add another object at the beginning of the Array, it should contain the following information:</p>
+<pre><code>[
+    {
+        file: "micro-id", // Unique file name of the micro
+        name: "My Micro", // Name of the micro
+        desc: "Micro info", // Information about what a micro is for
+        authorGitHub: "username", // Your GitHub username
+        form: [{ ... }] // Information requested from the user
+    },
+    ...
+]</code></pre>
+
+<h3>Retrieve Data from User</h3>
+<p>In some cases, you may need to get data from the user, for example, if you want to log in to a platform, you may want to get a username and password from the user. Each object creates an input and you enter the attributes.</p>
+<p>For example, let's ask the user to type the page whose title we want to retrieve.</p>
+
+<pre><code>form: [
+    { name: "pageUrl", type: "text", required: true, label: "Write page URL", placeholder: "https://www.example.com" }
+]</code></pre>
+
+<p>This code is converted to the following input element:</p>
+<pre><code>&lt;input name="pageUrl" type="text" placeholder="https://www.example.com" required /&gt;</code></pre>
+
+<p>Input type is <code>text</code> by default. Other input types are as follows: <code>textarea</code>, <code>checkbox</code>, <code>raido</code>, <code>range</code>, <code>number</code>, <code>password</code></p>
+
+<p>The <code>name</code> part is important because you will be able to access your topic with that name and it will be added to the body when sending the request.</p>
+
+<pre><code>await page.goto(context.pageUrl)
+const title = await page.title()
+return title</code></pre>
+
+<h3>Pull Request</h3>
+<p>If everything is ok, you can send a pull request and your code will be accepted after it is reviewed for the last time. Micros are completely open source, you can study other micros, learn new things and solve many of your problems.</p>

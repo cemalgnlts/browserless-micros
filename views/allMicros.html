@@ -1,0 +1,17 @@
+<h2 class="text-4xl font-bold">All Micros</h2>
+
+<input type="text" placeholder="Search..." class="input input-bordered w-full" />
+
+<section class="mt-6">
+  ${micros.map(micro => `
+  <div class="card w-96 bg-base-300 shadow-xl border-2 border-secondary">
+    <div class="card-body">
+      <h3 class="card-title">${micro.name}</h3>
+      <p>${micro.desc}</p>
+      <div class="card-actions justify-end">
+        <a class="btn btn-primary" href="/micros/${micro.file}" onclick="handleLink(event)">Try</a>
+      </div>
+    </div>
+  </div>
+  `).join("")}
+</section>

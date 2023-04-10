@@ -1,0 +1,28 @@
+{
+  "name": "browserless",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "build": "npm run tailwind:build",
+    "dev": "nodemon -e js,html --delay 1 & npm run tailwind:dev",
+    "tailwind:dev": "tailwindcss -i ./index.css -o ./public/base.css --watch",
+    "tailwind:build": "tailwindcss -i ./index.css -o ./public/base.css --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-es6-template-engine": "^2.2.3",
+    "uglify-js": "^3.17.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "daisyui": "^2.51.5",
+    "nodemon": "^2.0.22",
+    "tailwindcss": "^3.3.1"
+  }
+}

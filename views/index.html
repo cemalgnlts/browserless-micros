@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>Browserless Micros</title>
+    <link href="/base.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/github-dark.min.css" />
+    <script src="/main.js" defer></script>
+    <script src="/highlight.min.js" defer></script>
+  </head>
+  <body>
+    <div class="drawer drawer-mobile">
+      <input id="drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content scroll-smooth">
+        <header class="bg-base-100/90 px-3 lg:px-6 py-2 sticky top-0 backdrop-blur-sm flex items-center gap-2">
+          <progress class="progress progress-accent w-full h-1 absolute left-0 top-0 hidden"></progress>
+          <label for="drawer" class="drawer-button btn btn-circle btn-ghost m-0 p-0 lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </label>
+          <a class="text-lg lg:text-2xl font-bold text-primary" href="/">Browserless Micros</a>
+
+          <label for="modal-api-key" class="btn btn-circle btn-ghost ml-auto text-error" id="btnLock">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+              />
+            </svg>
+          </label>
+        </header>
+        <main class="px-6 mt-6">
+          <article class="prose w-full max-w-4xl pb-16">
+            <!-- Dynamic Content -->
+          </article>
+        </main>
+      </div>
+      <div class="drawer-side">
+        <label for="drawer" class="drawer-overlay"></label>
+        <aside class="bg-base-200 w-80">
+          <label for="drawer" class="btn btn-circle btn-ghost drawer-button absolute top-2 right-2 lg:hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </label>
+          <ul class="menu menu-compact p-4 mt-10 text-base-content">
+            <li class="menu-title"><span>Getting Started</span></li>
+            <li><a href="/">Introduction</a></li>
+            <li><a href="/docs/use">Use</a></li>
+            <li><a href="/docs/forDevelopers">For Developers</a></li>
+          </ul>
+
+          <ul class="menu menu-compact p-4 text-base-content">
+            <li class="menu-title"><span>Micros</span></li>
+            <li><a href="/micros">All</a></li>
+            ${micros.map(micro => `
+            <li><a href="/micros/${micro.file}">${micro.name}</a></li>
+            `).join("")}
+          </ul>
+        </aside>
+      </div>
+    </div>
+
+    <input type="checkbox" id="modal-api-key" class="modal-toggle" />
+    <div class="modal">
+      <div class="modal-box relative">
+        <label for="modal-api-key" class="btn btn-sm btn-circle absolute right-2 top-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </label>
+        <h3 class="text-lg font-bold">Your Personal API Key</h3>
+        <p class="py-4">Use your API key to test and use instances without limits.</p>
+        <input type="password" placeholder="Type here" class="input input-bordered w-full max-w-xs" id="inputApiKey" />
+        <div class="modal-action">
+          <label for="modal-api-key" class="btn" id="btnAddApiKey">Use</label>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

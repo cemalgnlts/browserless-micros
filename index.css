@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    height: 100%;
+  }
+
+  body {
+    min-height: 100%;
+  }
+
+  html {
+    font-family: Roboto, sans-serif;
+  }
+}
+
+pre {
+  padding: 1.5em 2em;
+}
+
+pre code {
+  background-color: transparent !important;
+}

@@ -1,0 +1,19 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+app_name: "Bless Micros"
+icon: "./app-icon.png"
+micros:
+  - name: "browserless-micros"
+    src: "./"
+    engine: "nodejs16"
+    primary: true
+    dev: "npm run dev"
+    commands:
+      - "npm run build"
+    presets:
+      env:
+        - name: "BROWSERLESS_API_KEY"
+          description: "browserless.io api key"
+          default: "f5f24db9-01b8-43e1-ba50-df8e9bb86677"
+    public_routes:
+      "/*"

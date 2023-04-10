@@ -1,0 +1,36 @@
+<h2 class="text-4xl font-bold">Use</h2>
+<p>You can use micros from their own pages or via the API we provide. Browserless Micros is currently deployed serverless. Browser processes can run for up to 20 seconds without interruption.</p>
+
+<h3>API Usage</h3>
+<p>Micro can be triggered with a <code>POST</code> request in your favorite software language.</p>
+<ul>
+  <li>To run a micro with the API, make a request to the <code>/micros/run/:micro</code> endpoint of our page.</li>
+  <li>You can include your API key in the <code>x-api-key</code> header when sending a request.</li>
+  <li>If the micro receives information from outside, add a JSON data.</li>
+</ul>
+
+<h4>JavaScript Example</h4>
+<pre><code>const MICRO_URL = "/micros/run/micro-name"
+const body = {
+    search: "Test"
+};
+
+fetch(MICRO_URL, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "x-api-key": "MY-API-KEY"
+    },
+    body: JSON.stringify(body)
+})
+.then(res => res.json())
+.then(console.log)</code></pre>
+
+<p>Request returns the following response:</p>
+<pre><code>{
+    "status": true,
+    "output": ..
+}</code></pre>
+
+<p><b>status: </b>Returns <code>true</code> if the micro worked fine, <code>false</code> if the micro has failed.</p>
+<p><b>output: </b>This data is reserved for the micro, if the micro is performing an operation it can return true when it has finished successfully, or it can return array if it is collecting information, it is entirely up to the micro, the response is in the micro's own page.</p>
